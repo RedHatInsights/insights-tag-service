@@ -1,0 +1,22 @@
+version: '2.2'
+services:
+  insights-tag-db:
+    image: registry.access.redhat.com/rhscl/postgresql-96-rhel7
+    ports:
+      - 5746:5432
+    environment:
+      - POSTGRESQL_DATABASE=insightstagservice
+      - POSTGRESQL_USER=insightstagservice
+      - POSTGRESQL_PASSWORD=insightstagservice
+
+  insights-tag-api:
+    build: .
+    ports:
+      - 8746:8746
+    environment:
+      - DB_HOST=insights-tag-db
+      - DB_PORT=5746
+      - LOG_LEVEL=INFO
+    depends_on:
+      - insights-tag-db
+    command: sh -c "./app.sh"
