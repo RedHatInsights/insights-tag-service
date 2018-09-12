@@ -8,6 +8,9 @@ django = "*"
 djangorestframework = "*"
 
 [dev-packages]
+flake8 = "*"
+flake8-junit-report = "*"
+unittest-xml-reporting = "*"
 
 [requires]
 python_version = "3.6"
