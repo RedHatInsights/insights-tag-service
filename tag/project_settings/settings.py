@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.postgresql'),
         'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'PORT': os.environ.get('DB_PORT', '5746'),
         'NAME': os.environ.get('DB_NAME', 'insightstagservice'),
         'USER': os.environ.get('DB_USER', 'insightstagservice'),
         'PASSWORD': os.environ.get('DB_PASSWORD', 'insightstagservice'),
