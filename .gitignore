@@ -16,3 +16,8 @@ tags
 
 #intellij
 .idea
+
+#python
+*.pyc
+__pycache__
+.pytest_cache
