@@ -6,7 +6,9 @@ from sqlalchemy.exc import IntegrityError
 
 
 def search():
-    return 'test', 200
+    tags = session.query(Tag).all()
+    tags_dump = [tag.dump() for tag in tags]
+    return {'count': 0, 'results': tags_dump}
 
 
 def post():
@@ -14,16 +16,17 @@ def post():
         new_tag = Tag(id=request.json['id'], name=request.json['name'],
                       description=request.json['description'])
         session.add(new_tag)
-        # response_body = session.query(Tag).filter_by(id=request.json['id'])
         session.commit()
+        response_body = session.query(Tag).filter(
+            Tag.id == request.json['id']).one()
     except (IntegrityError):
         return 'Exists', HTTPStatus.CONFLICT
 
-    return (), HTTPStatus.CREATED
+    return response_body.dump(), HTTPStatus.CREATED
 
 
 def get(id):
-    return 'test', 200
+    return session.query(Tag).filter(Tag.id == id).one().dump()
 
 
 def put():

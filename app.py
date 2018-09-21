@@ -1,3 +1,4 @@
+import common.config as config
 import connexion
 from connexion.resolver import RestyResolver
 from connexion.decorators.response import ResponseValidator
@@ -15,12 +16,24 @@ class CustomResponseValidator(ResponseValidator):
             raise Exception()
 
 
-db.init()
+session = db.init()
 validator_map = {
     'response': CustomResponseValidator
 }
-app = connexion.App('tag', specification_dir='swagger/',
-                    validator_map=validator_map)
+app = connexion.App('tag',
+                    specification_dir='swagger/',
+                    validator_map=validator_map,
+                    debug=config.DEBUG)
 app.add_api('api.spec.yaml', resolver=RestyResolver(
     'api'), validate_responses=True)
-app.run(port=8080)
+
+application = app.app
+
+
+@application.teardown_appcontext
+def shutdown_session(exception=None):
+    session.remove()
+
+
+if __name__ == '__main__':
+    app.run(port=config.PORT)

@@ -9,3 +9,6 @@ class Tag(Base):
     name = Column(String)
     description = Column(String)
     value = Column(String)
+
+    def dump(self):
+        return dict([(k, v) for k, v in vars(self).items() if not k.startswith('_') and v is not None])

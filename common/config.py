@@ -10,3 +10,5 @@ DATABASE = SimpleNamespace(
 )
 
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
+PORT = os.environ.get('PORT', 8080)
+DEBUG = os.environ.get('DEBUG', True)
