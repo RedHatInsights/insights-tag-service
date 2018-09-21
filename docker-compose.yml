@@ -5,9 +5,12 @@ services:
     ports:
       - 5746:5432
     environment:
-      - POSTGRESQL_DATABASE=insightstagservice
-      - POSTGRESQL_USER=insightstagservice
-      - POSTGRESQL_PASSWORD=insightstagservice
+      - POSTGRESQL_DATABASE=tagservice
+      - POSTGRESQL_USER=tagservice
+      - POSTGRESQL_PASSWORD=tagservice
+    command: sh -c "mkdir -p /opt/app-root/src/postgresql-start &&
+                    echo 'psql -c \"ALTER USER tagservice CREATEDB;\"' >> /opt/app-root/src/postgresql-start/make_test_work.sh &&
+                    run-postgresql"
 
   insights-tag-api:
     build: .

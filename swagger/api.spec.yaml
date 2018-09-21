@@ -1,0 +1,150 @@
+swagger: '2.0'
+info:
+  title: Insights Platform Tag API
+  description: A REST API to manage tags in the Insights Platform.
+  version: v1
+host: localhost:8000
+schemes:
+  - http
+basePath: /v1
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /tags:
+    get:
+      description: ''
+      parameters:
+        - name: page
+          in: query
+          description: A page number within the paginated result set.
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          schema:
+            required:
+              - count
+              - results
+            type: object
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+                format: uri
+              previous:
+                type: string
+                format: uri
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/Tag'
+      tags:
+        - tags
+    post:
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Tag'
+      tags:
+        - tags
+    parameters: []
+  /tags/{id}:
+    get:
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Tag'
+      tags:
+        - tags
+    put:
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Tag'
+      tags:
+        - tags
+    patch:
+      description: ''
+      parameters:
+        - name: data
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Tag'
+      tags:
+        - tags
+    delete:
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+        - tags
+    parameters:
+      - name: id
+        in: path
+        description: A unique value identifying this tag.
+        required: true
+        type: string
+definitions:
+  Tag:
+    required:
+      - id
+      - name
+      - description
+    type: object
+    properties:
+      created_at:
+        title: Created at
+        type: string
+        format: date-time
+        readOnly: true
+      updated_at:
+        title: Updated at
+        type: string
+        format: date-time
+        readOnly: true
+      id:
+        title: Id
+        type: string
+        minLength: 1
+      name:
+        title: Name
+        type: string
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      value:
+        title: Value
+        type: string

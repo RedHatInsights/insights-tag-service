@@ -4,14 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-djangorestframework = "*"
-psycopg2-binary = "*"
+connexion = "*"
+sqlalchemy = "*"
+"psycopg2-binary" = "*"
 
 [dev-packages]
 flake8 = "*"
 flake8-junit-report = "*"
 unittest-xml-reporting = "*"
+alembic = "*"
 
 [requires]
 python_version = "3.6"
