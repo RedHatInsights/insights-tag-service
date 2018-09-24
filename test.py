@@ -1,10 +1,14 @@
 import logging
+import os
 import shutil
 import subprocess
-from subprocess import CalledProcessError
+from subprocess import CalledProcessError, Popen
+from time import sleep
 
 logging.basicConfig(
     level='DEBUG', format='%(asctime)s | %(levelname)s | %(message)s')
+
+PORT = 8081
 
 
 def rm_gen_dir():
@@ -28,7 +32,7 @@ def run_oatts():
 
     try:
         subprocess.run(['oatts', 'generate', '-w', 'generated-tests', '-s',
-                        'swagger/api.spec.yaml'], check=True)
+                        'swagger/api.spec.yaml', '--host', 'localhost:{}'.format(PORT)], check=True)
         subprocess.run(
             ['mocha', '--recursive', 'generated-tests'], check=True)
     except(CalledProcessError):
@@ -37,7 +41,24 @@ def run_oatts():
     rm_gen_dir()
 
 
+server_process = None
+
+
+def start_server():
+    global server_process
+    env = os.environ.copy()
+    env['PORT'] = str(PORT)
+    server_process = Popen(['pipenv', 'run', 'server'], env=env)
+    sleep(3)
+
+
 if __name__ == '__main__':
-    logging.info('Testing...')
-    run_oatts()
-    logging.info('Testing is done')
+    try:
+        logging.info('Testing...')
+        start_server()
+        run_oatts()
+        logging.info('Testing is done')
+    except() as err:
+        logging.error(err)
+    finally:
+        server_process.terminate()

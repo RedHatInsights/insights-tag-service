@@ -35,5 +35,9 @@ def shutdown_session(exception=None):
     session.remove()
 
 
+def start(port):
+    app.run(port)
+
+
 if __name__ == '__main__':
-    app.run(port=config.PORT)
+    start(port=config.PORT)
