@@ -21,8 +21,7 @@ def post():
 
 
 def get(id):
-    response = session.query(Tag).filter(Tag.id == id).one().dump()
-    return response, HTTPStatus.OK
+    return session.query(Tag).filter(Tag.id == id).one().dump()
 
 
 def put(id):

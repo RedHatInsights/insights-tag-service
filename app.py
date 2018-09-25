@@ -34,11 +34,11 @@ app.add_api('api.spec.yaml', resolver=RestyResolver(
 
 
 def exists_handler(exception):
-    return Response(response=json.dumps({'error': 'Resource exists.'}), status=HTTPStatus.CONFLICT)
+    return Response(response=json.dumps({'message': 'Resource exists.'}), status=HTTPStatus.CONFLICT)
 
 
 def no_result_handler(exception):
-    return Response(response=json.dumps({'error': 'Resource not found.'}), status=HTTPStatus.NOT_FOUND)
+    return Response(response=json.dumps({'message': 'Resource not found.'}), status=HTTPStatus.NOT_FOUND)
 
 
 app.add_error_handler(NoResultFound, no_result_handler)

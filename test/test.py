@@ -31,14 +31,17 @@ def run_oatts():
     rm_gen_dir()
 
     try:
-        subprocess.run(['oatts', 'generate', '-w', 'generated-tests', '-s',
-                        'swagger/api.spec.yaml', '--host', 'localhost:{}'.format(PORT)], check=True)
+        subprocess.run(['oatts', 'generate',
+                        '-w', 'generated-tests',
+                        '-s', 'swagger/api.spec.yaml',
+                        '--host', 'localhost:{}'.format(PORT),
+                        '--customValuesFile', 'test/values.json'], check=True)
         subprocess.run(
             ['mocha', '--recursive', 'generated-tests'], check=True)
     except(CalledProcessError):
         logging.error('oatts tests failed!')
-
-    rm_gen_dir()
+    finally:
+        rm_gen_dir()
 
 
 server_process = None

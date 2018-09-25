@@ -68,6 +68,8 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/TagRetrieve'
+        '404':
+            $ref: '#/responses/NotFound'
       tags:
         - tags
     put:
@@ -83,6 +85,8 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/TagRetrieve'
+        '404':
+            $ref: '#/responses/NotFound'
       tags:
         - tags
     patch:
@@ -98,6 +102,8 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/TagRetrieve'
+        '404':
+            $ref: '#/responses/NotFound'
       tags:
         - tags
     delete:
@@ -106,6 +112,8 @@ paths:
       responses:
         '204':
           description: ''
+        '404':
+            $ref: '#/responses/NotFound'
       tags:
         - tags
     parameters:
@@ -114,7 +122,19 @@ paths:
         description: A unique value identifying this tag.
         required: true
         type: string
+responses:
+  NotFound:
+    description: The specified resource was not found
+    schema:
+      $ref: '#/definitions/Error'
 definitions:
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+    required:
+      - message
   TagCreate:
     required:
       - id
