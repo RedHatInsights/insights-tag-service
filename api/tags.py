@@ -2,7 +2,6 @@ from connexion import request
 from db.base import session
 from db.models import Tag
 from http import HTTPStatus
-from sqlalchemy.exc import IntegrityError
 
 
 def search():
@@ -12,30 +11,27 @@ def search():
 
 
 def post():
-    try:
-        new_tag = Tag(id=request.json['id'], name=request.json['name'],
-                      description=request.json['description'])
-        session.add(new_tag)
-        session.commit()
-        response_body = session.query(Tag).filter(
-            Tag.id == request.json['id']).one()
-    except (IntegrityError):
-        return 'Exists', HTTPStatus.CONFLICT
-
+    new_tag = Tag(id=request.json['id'], name=request.json['name'],
+                  description=request.json['description'])
+    session.add(new_tag)
+    session.commit()
+    response_body = session.query(Tag).filter(
+        Tag.id == request.json['id']).one()
     return response_body.dump(), HTTPStatus.CREATED
 
 
 def get(id):
-    return session.query(Tag).filter(Tag.id == id).one().dump()
+    response = session.query(Tag).filter(Tag.id == id).one().dump()
+    return response, HTTPStatus.OK
 
 
-def put():
-    pass
+def put(id):
+    return (), HTTPStatus.NOT_IMPLEMENTED
 
 
-def patch():
-    pass
+def patch(id):
+    return (), HTTPStatus.NOT_IMPLEMENTED
 
 
-def delete():
-    pass
+def delete(id):
+    return (), HTTPStatus.NOT_IMPLEMENTED

@@ -16,3 +16,6 @@ tags
 
 #intellij
 .idea
+
+#python
+*.pyc

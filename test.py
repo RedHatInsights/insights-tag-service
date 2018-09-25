@@ -49,7 +49,7 @@ def start_server():
     env = os.environ.copy()
     env['PORT'] = str(PORT)
     server_process = Popen(['pipenv', 'run', 'server'], env=env)
-    sleep(3)
+    sleep(5)
 
 
 if __name__ == '__main__':

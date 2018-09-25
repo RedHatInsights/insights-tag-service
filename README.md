@@ -38,3 +38,27 @@ npm install oatts mocha chakram -g
 ```
 pipenv run test
 ```
+
+Generate migrations
+--------------------
+1. Start a virtual env
+```
+pipenv shell
+```
+2. Update database to current version
+```
+PYTHONPATH=. alembic upgrade head
+```
+3. Generate new migration version from changes to db.models
+```
+PYTHONPATH=. alembic revision --autogenerate -m "Description of model changes"
+```
+4. Open db/migrations/versions/<new-script>.py and make any required manual changes
+5. Run the migration
+```
+PYTHONPATH=. alembic upgrade head
+```
+
+Dev Guidelines
+--------------------
+- In general exceptions should be handled via app.add_error_handler. See https://connexion.readthedocs.io/en/latest/exceptions.html#rendering-exceptions-through-the-flask-handler

@@ -40,7 +40,7 @@ paths:
               results:
                 type: array
                 items:
-                  $ref: '#/definitions/Tag'
+                  $ref: '#/definitions/TagRetrieve'
       tags:
         - tags
     post:
@@ -50,12 +50,12 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: '#/definitions/TagCreate'
       responses:
         '201':
           description: ''
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: '#/definitions/TagRetrieve'
       tags:
         - tags
     parameters: []
@@ -67,7 +67,7 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: '#/definitions/TagRetrieve'
       tags:
         - tags
     put:
@@ -77,12 +77,12 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: '#/definitions/TagCreate'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: '#/definitions/TagRetrieve'
       tags:
         - tags
     patch:
@@ -92,12 +92,12 @@ paths:
           in: body
           required: true
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: '#/definitions/TagCreate'
       responses:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: '#/definitions/TagRetrieve'
       tags:
         - tags
     delete:
@@ -115,23 +115,13 @@ paths:
         required: true
         type: string
 definitions:
-  Tag:
+  TagCreate:
     required:
       - id
       - name
       - description
     type: object
     properties:
-      created_at:
-        title: Created at
-        type: string
-        format: date-time
-        readOnly: true
-      updated_at:
-        title: Updated at
-        type: string
-        format: date-time
-        readOnly: true
       id:
         title: Id
         type: string
@@ -147,3 +137,37 @@ definitions:
       value:
         title: Value
         type: string
+  TagRetrieve:
+    required:
+      - id
+      - name
+      - description
+      - created_at
+      - updated_at
+    type: object
+    properties:
+      id:
+        title: Id
+        type: string
+        minLength: 1
+      name:
+        title: Name
+        type: string
+        minLength: 1
+      description:
+        title: Description
+        type: string
+        minLength: 1
+      value:
+        title: Value
+        type: string
+      created_at:
+        title: Created at
+        type: string
+        format: date-time
+        readOnly: true
+      updated_at:
+        title: Updated at
+        type: string
+        format: date-time
+        readOnly: true
