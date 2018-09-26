@@ -12,3 +12,5 @@ DATABASE = SimpleNamespace(
 LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
 PORT = os.environ.get('PORT', 8080)
 DEBUG = os.environ.get('DEBUG', True)
+DB_POOL_SIZE = os.environ.get('DB_POOL_SIZE', 30)
+DB_MAX_OVERFLOW = os.environ.get('DB_MAX_OVERFLOW', 100)
