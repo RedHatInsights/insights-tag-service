@@ -1,4 +1,4 @@
-import common.config as config
+from common.config import config
 import connexion
 from connexion.resolver import RestyResolver
 from connexion.decorators.response import ResponseValidator
@@ -28,7 +28,7 @@ validator_map = {
 app = connexion.App('tag',
                     specification_dir='swagger/',
                     validator_map=validator_map,
-                    debug=config.DEBUG)
+                    debug=config.debug)
 app.add_api('api.spec.yaml', resolver=RestyResolver(
     'api'), validate_responses=True)
 
@@ -57,4 +57,4 @@ def start(port):
 
 
 if __name__ == '__main__':
-    start(port=config.PORT)
+    start(port=int(config.port))

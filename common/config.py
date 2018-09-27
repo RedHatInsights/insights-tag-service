@@ -1,16 +1,18 @@
-from types import SimpleNamespace
+import configparser
 import os
+from types import SimpleNamespace
 
-DATABASE = SimpleNamespace(
-    NAME=os.environ.get('DB_NAME', 'tagservice'),
-    USER=os.environ.get('DB_USER', 'tagservice'),
-    PASSWORD=os.environ.get('DB_PASSWORD', 'tagservice'),
-    HOST=os.environ.get('DB_HOST', 'localhost'),
-    PORT=os.environ.get('DB_PORT', '5746'),
-)
 
-LOG_LEVEL = os.environ.get('LOG_LEVEL', 'INFO')
-PORT = os.environ.get('PORT', 8080)
-DEBUG = os.environ.get('DEBUG', True)
-DB_POOL_SIZE = os.environ.get('DB_POOL_SIZE', 30)
-DB_MAX_OVERFLOW = os.environ.get('DB_MAX_OVERFLOW', 100)
+config_parser = configparser.ConfigParser()
+config_parser.read('common/config.ini')
+
+tag_env = os.environ.get('INSIGHTS_TAG_ENV', 'dev')
+config = config_parser[tag_env]
+
+for key in config:
+    try:
+        config[key] = os.getenv(key)
+    except:
+        pass
+
+config = SimpleNamespace(**config)

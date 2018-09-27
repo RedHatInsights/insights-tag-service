@@ -1,3 +1,4 @@
+from common.config import config
 import logging
 import os
 import shutil
@@ -7,7 +8,7 @@ from time import sleep
 from factories.tags import TagFactory
 
 logging.basicConfig(
-    level='DEBUG', format='%(asctime)s | %(levelname)s | %(message)s')
+    level=config.log_level, format='%(asctime)s | %(levelname)s | %(message)s')
 
 PORT = 8081
 

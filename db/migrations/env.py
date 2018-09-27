@@ -13,11 +13,11 @@ config = context.config
 
 config.set_main_option(
     'sqlalchemy.url',
-    'postgresql://{}:{}@{}:{}/{}'.format(tag_service_config.DATABASE.USER,
-                                         tag_service_config.DATABASE.PASSWORD,
-                                         tag_service_config.DATABASE.HOST,
-                                         tag_service_config.DATABASE.PORT,
-                                         tag_service_config.DATABASE.NAME))
+    'postgresql://{}:{}@{}:{}/{}'.format(tag_service_config.db_user,
+                                         tag_service_config.db_password,
+                                         tag_service_config.db_host,
+                                         tag_service_config.db_port,
+                                         tag_service_config.db_name))
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
