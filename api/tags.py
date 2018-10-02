@@ -1,5 +1,5 @@
 from connexion import request
-from db.base import session
+from insights_connexion.db.base import session
 from db.models import Tag
 from http import HTTPStatus
 

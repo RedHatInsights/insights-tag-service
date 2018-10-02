@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d02151f3775dc7f88e7d4cdcb9750311adc01f43381aa2020921788b8258e151"
+            "sha256": "f29093106aa459b283a54f293eb624ded23d705c5aadd6a6bfbc0b3e368fd494"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -248,6 +248,11 @@
             ],
             "index": "pypi",
             "version": "==2.1.0"
+        },
+        "insights-connexion": {
+            "editable": true,
+            "git": "git://github.com/RedHatInsights/insights_connexion.git",
+            "ref": "953a8c5cbdbe7cfa40ec86b3a13b71aa9bf0ca80"
         },
         "mako": {
             "hashes": [

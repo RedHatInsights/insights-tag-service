@@ -1,6 +1,6 @@
 import factory
 from db import models
-from db import base
+from insights_connexion.db import base
 import datetime
 
 

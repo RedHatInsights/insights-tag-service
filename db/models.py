@@ -1,4 +1,4 @@
-from db.base import Base
+from insights_connexion.db.base import Base
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.sql import func
 
