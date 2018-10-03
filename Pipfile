@@ -7,18 +7,18 @@ name = "pypi"
 connexion = "*"
 sqlalchemy = "*"
 "psycopg2-binary" = "*"
-factory-boy = "*"
+alembic = "*"
+insights-connexion = {editable = true, git = "git://github.com/RedHatInsights/insights_connexion.git"}
 
 [dev-packages]
 flake8 = "*"
 flake8-junit-report = "*"
 unittest-xml-reporting = "*"
-alembic = "*"
-insights-connexion = {editable = true, git = "git://github.com/RedHatInsights/insights_connexion.git"}
+factory-boy = "*"
 
 [requires]
 python_version = "3.6"
 
 [scripts]
 server = "python app.py"
-test = "python test.py"
+test = "python test/test.py"

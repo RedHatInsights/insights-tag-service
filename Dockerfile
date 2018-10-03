@@ -1,9 +1,7 @@
-FROM registry.access.redhat.com/rhscl/python-36-rhel7
-
-WORKDIR /opt/app-root/src
+FROM python:3.6
+WORKDIR /usr/src/app
 COPY . .
-
-RUN scl enable rh-python36 "pip install pipenv && pipenv install --system"
-
-EXPOSE 8080
-CMD pipenv run server
+RUN pip install pipenv && \
+    pipenv install --system --deploy
+USER 1001
+CMD ["python", "app.py"]
