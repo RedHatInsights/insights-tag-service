@@ -5,5 +5,5 @@ COPY . .
 
 RUN scl enable rh-python36 "pip install pipenv && pipenv install --system"
 
-EXPOSE 8746
-CMD ./app.sh
+EXPOSE 8080
+CMD pipenv run server
