@@ -3,8 +3,6 @@ info:
   title: Insights Platform Tag API
   description: A REST API to manage tags in the Insights Platform.
   version: v1
-schemes:
-  - http
 basePath: /v1
 consumes:
   - application/json
