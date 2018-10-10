@@ -4,10 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-connexion = "*"
-sqlalchemy = "*"
-"psycopg2-binary" = "*"
-alembic = "*"
 insights-connexion = {editable = true, git = "git://github.com/RedHatInsights/insights_connexion.git"}
 
 [dev-packages]

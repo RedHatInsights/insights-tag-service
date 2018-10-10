@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3bc4abd741cd2bf3f2ed0a74324d0910b3c9444aad01ae00b2bc91927a19d6b6"
+            "sha256": "aec32290a215636dc56a9667caa152d2b6375ae0f28beaae05e115749a1c3618"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -21,7 +21,6 @@
                 "sha256:52d73b1d750f1414fa90c25a08da47b87de1e4ad883935718a8f36396e19e78e",
                 "sha256:eb7db9b4510562ec37c91d00b00d95fde076c1030d3f661aea882eec532b3565"
             ],
-            "index": "pypi",
             "version": "==1.0.0"
         },
         "certifi": {
@@ -58,7 +57,6 @@
                 "sha256:a7b8629c7175017ef4bb9cb234d172aaf91ad48f769513dae21142e42668fa04",
                 "sha256:d71932ad6de4f9558e37f474528f073b38faacdd2f9b7870e728ecb53d7eac1d"
             ],
-            "index": "pypi",
             "version": "==1.5.3"
         },
         "flask": {
@@ -84,7 +82,7 @@
         "insights-connexion": {
             "editable": true,
             "git": "git://github.com/RedHatInsights/insights_connexion.git",
-            "ref": "620afa7684121c7f39ce1f0f4f638011dabc2aa9"
+            "ref": "787a866a1c896a7d9b0a3f30de4b9fe358c1c5f3"
         },
         "itsdangerous": {
             "hashes": [
@@ -151,7 +149,6 @@
                 "sha256:eadbd32b6bc48b67b0457fccc94c86f7ccc8178ab839f684eb285bb592dc143e",
                 "sha256:ecbc6dfff6db06b8b72ae8a2f25ff20fbdcb83cb543811a08f7cb555042aa729"
             ],
-            "index": "pypi",
             "version": "==2.7.5"
         },
         "python-dateutil": {
@@ -202,15 +199,14 @@
             "hashes": [
                 "sha256:c5951d9ef1d5404ed04bae5a16b60a0779087378928f997a294d1229c6ca4d3e"
             ],
-            "index": "pypi",
             "version": "==1.2.12"
         },
         "swagger-spec-validator": {
             "hashes": [
-                "sha256:7212467c6be39a86ed5b0009ad04d1a1a8c4b0bb7eea8ba396763347bdc3e20a",
-                "sha256:aec4cbc4d16a55c4ba7fcf1f42d2600b5813114060e0dea0553c9527b0038a2c"
+                "sha256:320308dd4e9525daf2c041d37414283b3c7424de912ea5c37c215206e3890e44",
+                "sha256:b9618efbfa5446cdf09e72f9d384b869970c63c9a726c981f0abcf2d63a929cb"
             ],
-            "version": "==2.4.0"
+            "version": "==2.4.1"
         },
         "urllib3": {
             "hashes": [
