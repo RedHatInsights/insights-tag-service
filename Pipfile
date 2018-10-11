@@ -18,3 +18,4 @@ python_version = "3.6"
 [scripts]
 server = "python app.py"
 test = "python test/test.py"
+migrate = "alembic upgrade head"
