@@ -1,13 +1,28 @@
 from connexion import request
+from insights_connexion import responses
 from insights_connexion.db.base import session
 from db.models import Tag
-from http import HTTPStatus
+
+
+def _get_one_tag(id):
+    return session.query(Tag).filter(Tag.id == id).one()
+
+
+def _update_tag(id):
+    existing_tag = session.query(Tag).filter(Tag.id == id).first()
+
+    if existing_tag is None:
+        return responses.not_found()
+
+    existing_tag.update(**request.json)
+    session.commit()
+    return responses.update(_get_one_tag(id).dump())
 
 
 def search():
     tags = session.query(Tag).all()
     tags_dump = [tag.dump() for tag in tags]
-    return {'count': 0, 'results': tags_dump}
+    return responses.search(0, tags_dump)
 
 
 def post():
@@ -15,22 +30,26 @@ def post():
                   description=request.json['description'])
     session.add(new_tag)
     session.commit()
-    response_body = session.query(Tag).filter(
-        Tag.id == request.json['id']).one()
-    return response_body.dump(), HTTPStatus.CREATED
+    response_body = _get_one_tag(request.json['id'])
+    return responses.create(response_body.dump())
 
 
 def get(id):
-    return session.query(Tag).filter(Tag.id == id).one().dump()
+    return _get_one_tag(id).dump()
 
 
 def put(id):
-    return (), HTTPStatus.NOT_IMPLEMENTED
+    return _update_tag(id)
 
 
 def patch(id):
-    return (), HTTPStatus.NOT_IMPLEMENTED
+    return _update_tag(id)
 
 
 def delete(id):
-    return (), HTTPStatus.NOT_IMPLEMENTED
+    existing_tag = _get_one_tag(id)
+    if existing_tag is None:
+        return responses.not_found()
+
+    session.delete(existing_tag)
+    return responses.delete()

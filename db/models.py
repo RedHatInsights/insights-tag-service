@@ -16,3 +16,13 @@ class Tag(Base):
 
     def dump(self):
         return dict([(k, v) for k, v in vars(self).items() if not k.startswith('_') and v is not None])
+
+    def update(self, name=None, description=None, value=None):
+        if name is not None:
+            self.name = name
+
+        if description is not None:
+            self.description = description
+
+        if value is not None:
+            self.value = value
