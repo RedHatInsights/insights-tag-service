@@ -26,8 +26,7 @@ def search():
 
 
 def post():
-    new_tag = Tag(id=request.json['id'], name=request.json['name'],
-                  description=request.json['description'])
+    new_tag = Tag(**request.json)
     session.add(new_tag)
     session.commit()
     response_body = _get_one_tag(request.json['id'])
