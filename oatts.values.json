@@ -3,12 +3,36 @@
         "get": {
             "200": {
                 "path": {
-                    "id": "test-tag-2"
+                    "id": "get-tag"
                 }
             },
             "404": {
                 "path": {
-                    "id": "test-tag-999"
+                    "id": "not-found-tag"
+                }
+            }
+        },
+        "put": {
+            "200": {
+                "path": {
+                    "id": "put-tag"
+                }
+            }
+        },
+        "patch": {
+            "200": {
+                "path": {
+                    "id": "patch-tag"
+                },
+                "body": {
+                    "name": "updated-tag-name"
+                }
+            }
+        },
+        "delete": {
+            "204": {
+                "path": {
+                    "id": "delete-tag"
                 }
             }
         }

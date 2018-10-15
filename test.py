@@ -20,6 +20,10 @@ def seed():
         updated_at = datetime.datetime(2016, 11, 3)
 
     TagFactory()
+    TagFactory(id='put-tag')
+    TagFactory(id='get-tag')
+    TagFactory(id='delete-tag')
+    TagFactory(id='patch-tag')
 
 
 oatts.seed = seed
