@@ -1,54 +1,48 @@
-from connexion import request
-from insights_connexion import responses
-from insights_connexion.db.base import session
 from db.models import Tag
+from insights_connexion import responses
 
 
-def _get_one_tag(id):
-    return session.query(Tag).filter(Tag.id == id).one()
+async def _get_one_tag(id):
+    return await Tag.query.where(Tag.id == id).gino.first()
 
 
-def _update_tag(id):
-    existing_tag = session.query(Tag).filter(Tag.id == id).first()
+async def _update_tag(id, body):
+    existing_tag = await _get_one_tag(id)
 
     if existing_tag is None:
         return responses.not_found()
 
-    existing_tag.update(**request.json)
-    session.commit()
-    return responses.update(_get_one_tag(id).dump())
+    await existing_tag.update(**body).apply()
+    updated_tag = await _get_one_tag(id)
+    return responses.update(updated_tag.dump())
 
 
-def search():
-    tags = session.query(Tag).all()
+async def search():
+    tags = await Tag.query.gino.all()
     tags_dump = [tag.dump() for tag in tags]
     return responses.search(0, tags_dump)
 
 
-def post():
-    new_tag = Tag(**request.json)
-    session.add(new_tag)
-    session.commit()
-    response_body = _get_one_tag(request.json['id'])
-    return responses.create(response_body.dump())
+async def post(request=None):
+    body = await request.json()
+    tag_to_create = Tag(**body)
+    created_tag = await tag_to_create.create()
+    return responses.create(created_tag.dump())
 
 
-def get(id):
-    return _get_one_tag(id).dump()
-
-
-def put(id):
-    return _update_tag(id)
-
-
-def patch(id):
-    return _update_tag(id)
-
-
-def delete(id):
-    existing_tag = _get_one_tag(id)
-    if existing_tag is None:
+async def get(id):
+    body = await _get_one_tag(id)
+    if body is None:
         return responses.not_found()
+    else:
+        return responses.get(body.dump())
 
-    session.delete(existing_tag)
-    return responses.delete()
+
+async def put(id, request=None):
+    body = await request.json()
+    return _update_tag(id, body)
+
+
+async def patch(id, request=None):
+    body = await request.json()
+    return _update_tag(id, body)

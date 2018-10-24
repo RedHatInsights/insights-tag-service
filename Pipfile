@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-insights-connexion = {editable = true, git = "git://github.com/RedHatInsights/insights_connexion.git"}
+insights-connexion = {editable = true, ref = "aiohttp-validation", git = "git://github.com/RedHatInsights/insights_connexion.git"}
+connexion = {editable = true, ref = "body_middleware_fix", git = "git://github.com/fijshion/connexion.git"}
 
 [dev-packages]
 flake8 = "*"
 flake8-junit-report = "*"
 unittest-xml-reporting = "*"
-factory-boy = "*"
 
 [requires]
 python_version = "3.6"

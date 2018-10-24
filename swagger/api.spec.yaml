@@ -104,16 +104,6 @@ paths:
             $ref: '#/responses/NotFound'
       tags:
         - tags
-    delete:
-      description: ''
-      parameters: []
-      responses:
-        '204':
-          description: ''
-        '404':
-            $ref: '#/responses/NotFound'
-      tags:
-        - tags
     parameters:
       - name: id
         in: path

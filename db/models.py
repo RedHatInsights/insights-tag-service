@@ -1,28 +1,18 @@
-from insights_connexion.db.base import Base
-from sqlalchemy import Column, String, DateTime
-from sqlalchemy.sql import func
+from insights_connexion.db.gino import db
 
 
-class Tag(Base):
+class Tag(db.Model):
     __tablename__ = 'tags'
 
-    id = Column(String, primary_key=True)
-    name = Column(String)
-    description = Column(String)
-    value = Column(String)
-    created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, onupdate=func.now(),
-                        server_default=func.now())
+    id = db.Column(db.Unicode, primary_key=True)
+    name = db.Column(db.Unicode)
+    description = db.Column(db.Unicode)
+    value = db.Column(db.Unicode)
+
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime,
+                           onupdate=db.func.now(),
+                           server_default=db.func.now())
 
     def dump(self):
-        return dict([(k, v) for k, v in vars(self).items() if not k.startswith('_') and v is not None])
-
-    def update(self, name=None, description=None, value=None):
-        if name is not None:
-            self.name = name
-
-        if description is not None:
-            self.description = description
-
-        if value is not None:
-            self.value = value
+        return {k: v for k, v in self.__values__.items() if v is not None}

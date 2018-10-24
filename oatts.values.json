@@ -1,5 +1,9 @@
 {
     "/tags/{id}": {
+        "header": {
+            "Accept": "application/json",
+            "asdf": "1234"
+        },
         "get": {
             "200": {
                 "path": {
@@ -17,6 +21,11 @@
                 "path": {
                     "id": "put-tag"
                 }
+            },
+            "404": {
+                "path": {
+                    "id": "not-found-tag"
+                }
             }
         },
         "patch": {
@@ -27,12 +36,13 @@
                 "body": {
                     "name": "updated-tag-name"
                 }
-            }
-        },
-        "delete": {
-            "204": {
+            },
+            "404": {
                 "path": {
-                    "id": "delete-tag"
+                    "id": "not-found-tag"
+                },
+                "body": {
+                    "name": "updated-tag-name"
                 }
             }
         }
