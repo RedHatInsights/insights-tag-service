@@ -18,6 +18,27 @@ paths:
           description: A page number within the paginated result set.
           required: false
           type: integer
+          default: 0
+        - name: page_size
+          in: query
+          description: Size of the page
+          required: false
+          type: integer
+          default: 10
+        - name: sort_by
+          in: query
+          description: Attribute to sort results by
+          required: false
+          type: string
+          default: id
+          enum: [id, name, description, created_at, updated_at]
+        - name: sort_dir
+          in: query
+          description: Direction to sort
+          required: false
+          type: string
+          default: asc
+          enum: [asc, desc]
       responses:
         '200':
           description: 'List tags response'

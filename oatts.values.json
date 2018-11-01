@@ -3,6 +3,16 @@
         "headers": {
             "Accept": "application/json"
         },
+        "get": {
+          "200": {
+            "query": {
+                "page": 0,
+                "page_size": 10,
+                "sort_by": "name",
+                "sort_dir": "desc"
+            }
+          }
+        }, 
         "post": {
             "201": {
               "body": {

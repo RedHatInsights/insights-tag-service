@@ -216,7 +216,7 @@
         "insights-connexion": {
             "editable": true,
             "git": "git://github.com/RedHatInsights/insights_connexion.git",
-            "ref": "fd8ac9bcb95a247d700488e942466ed400838e18"
+            "ref": "71f64d329cb346bb6a2e6bbe33b8868db1059a22"
         },
         "itsdangerous": {
             "hashes": [
