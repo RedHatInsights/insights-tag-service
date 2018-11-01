@@ -1,8 +1,23 @@
 {
+    "/tags": {
+        "headers": {
+            "Accept": "application/json"
+        },
+        "post": {
+            "201": {
+              "body": {
+                "body": {
+                  "name": "created-tag-name",
+                  "description": "created-tag-desc",
+                  "id": "created-tag-id"
+                }
+              }
+            }
+        }
+    },
     "/tags/{id}": {
-        "header": {
-            "Accept": "application/json",
-            "asdf": "1234"
+        "headers": {
+            "Accept": "application/json"
         },
         "get": {
             "200": {
@@ -34,7 +49,9 @@
                     "id": "patch-tag"
                 },
                 "body": {
+                  "body": {
                     "name": "updated-tag-name"
+                  }
                 }
             },
             "404": {
@@ -42,7 +59,9 @@
                     "id": "not-found-tag"
                 },
                 "body": {
+                  "body": {
                     "name": "updated-tag-name"
+                  }
                 }
             }
         }

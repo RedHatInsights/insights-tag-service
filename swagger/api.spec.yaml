@@ -20,7 +20,7 @@ paths:
           type: integer
       responses:
         '200':
-          description: ''
+          description: 'List tags response'
           schema:
             required:
               - count
@@ -44,14 +44,14 @@ paths:
     post:
       description: ''
       parameters:
-        - name: data
+        - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/TagPost'
       responses:
         '201':
-          description: ''
+          description: 'Created tag successfully response'
           schema:
             $ref: '#/definitions/TagRetrieve'
       tags:
@@ -63,7 +63,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: ''
+          description: 'Get single tag successful response'
           schema:
             $ref: '#/definitions/TagRetrieve'
         '404':
@@ -73,14 +73,14 @@ paths:
     put:
       description: ''
       parameters:
-        - name: data
+        - name: body
           in: body
           required: true
           schema:
             $ref: '#/definitions/TagPut'
       responses:
         '200':
-          description: ''
+          description: 'PUT tag successful response'
           schema:
             $ref: '#/definitions/TagRetrieve'
         '404':
@@ -90,14 +90,14 @@ paths:
     patch:
       description: ''
       parameters:
-        - name: data
+        - name: body
           in: body
           required: false
           schema:
             $ref: '#/definitions/TagPatch'
       responses:
         '200':
-          description: ''
+          description: 'PATCH tag successful response'
           schema:
             $ref: '#/definitions/TagRetrieve'
         '404':
