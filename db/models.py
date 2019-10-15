@@ -8,6 +8,8 @@ class Tag(db.Model):
     name = db.Column(db.Unicode)
     description = db.Column(db.Unicode)
     value = db.Column(db.Unicode)
+    account_id = db.Column(db.Unicode)
+    namespace = db.Column(db.Unicode)
 
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime,
