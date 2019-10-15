@@ -22,8 +22,6 @@ def upgrade():
                     sa.Column('name', sa.String(), nullable=True),
                     sa.Column('description', sa.String(), nullable=True),
                     sa.Column('value', sa.String(), nullable=True),
-                    sa.Column('account_id', sa.String(), nullable=True),
-                    sa.Column('namespace', sa.String(), nullable=True),
                     sa.PrimaryKeyConstraint('id')
                     )
 
