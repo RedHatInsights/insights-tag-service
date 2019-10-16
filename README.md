@@ -2,7 +2,6 @@ Insights Tag Service
 ===========================================
 
 Dev Setup
-
 --------------------
 
 1. Install dependencies
@@ -32,7 +31,6 @@ pipenv run server
 ```
 
 Testing
-
 --------------------
 
 1. Install dependencies
@@ -45,12 +43,11 @@ npm install oatts mocha chakram -g
 
 2. Run generated tests
 
-```
+``` sh
 pipenv run test
 ```
 
 Dev Guidelines
-
 --------------------
 
 - In general exceptions should be handled via app.add_error_handler. See [here](https://connexion.readthedocs.io/en/latest/exceptions.html#rendering-exceptions-through-the-flask-handler)
@@ -74,6 +71,7 @@ Dev Guidelines
   ```
 
   4. Open db/migrations/versions/{new-script}.py and make any required manual changes
+
   5. Run the migration
 
   ``` sh
