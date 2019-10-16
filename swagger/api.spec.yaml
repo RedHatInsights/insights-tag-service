@@ -146,10 +146,18 @@ definitions:
       - message
   TagPut:
     required:
+      - id
       - name
+      - value
       - description
+      - account_id
+      - namespace
     type: object
     properties:
+      id:
+        title: ID
+        type: string
+        minLength: 1
       name:
         title: Name
         type: string
@@ -160,6 +168,12 @@ definitions:
         minLength: 1
       value:
         title: Value
+        type: string
+      account_id:
+        title: Account ID
+        type: string
+      namespace:
+        title: Namespace
         type: string
   TagPatch:
     type: object
@@ -177,15 +191,13 @@ definitions:
         type: string
   TagPost:
     required:
-      - id
       - name
       - description
+      - account_id
+      - value
+      - namespace
     type: object
     properties:
-      id:
-        title: Id
-        type: string
-        minLength: 1
       name:
         title: Name
         type: string
@@ -197,10 +209,17 @@ definitions:
       value:
         title: Value
         type: string
+      account_id:
+        title: Account ID
+        type: string
+      namespace:
+        title: Namespace
+        type: string
   TagRetrieve:
     required:
       - id
       - name
+      - value
       - description
       - account_id
       - namespace

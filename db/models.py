@@ -4,7 +4,7 @@ from insights_connexion.db.gino import db
 class Tag(db.Model):
     __tablename__ = 'tags'
 
-    id = db.Column(db.Unicode, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Unicode)
     description = db.Column(db.Unicode)
     value = db.Column(db.Unicode)
