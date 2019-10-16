@@ -4,4 +4,5 @@ COPY . .
 RUN pip install pipenv && \
     pipenv install --system --deploy
 USER 1001
+CMD ["pipenv", "run", "PYTHONPATH=. alembic upgrade head"]
 CMD ["python", "app.py"]
