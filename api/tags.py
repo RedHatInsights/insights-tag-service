@@ -21,16 +21,20 @@ async def _update_tag(id, body):
         return responses.update(updated_tag.dump())
 
 
-async def search(page, page_size, sort_by, sort_dir, request=None):
-    sort_func = getattr(db, sort_dir)
+async def search(request=None):
     [tags, count] = await asyncio.gather(
-        Tag.query.limit(page_size).offset(
-            page * page_size).order_by(sort_func(sort_by)).gino.all(),
+        Tag.query.gino.all(),
         db.scalar(db.select([db.func.count(Tag.id)]))
     )
 
     tags_dump = [tag.dump() for tag in tags]
-    return responses.search(count, tags_dump)
+    namespaces_list = []
+    ns1 = {}
+    ns1["name"] = "testNamespace"
+    ns1["tags"] = [{"name1": "value1"}, {"name2": "value2"}]
+    namespaces_list.append(ns1)
+
+    return responses.search(count, namespaces_list)
 
 
 async def post(request=None):

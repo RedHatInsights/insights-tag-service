@@ -12,33 +12,6 @@ paths:
   /tags:
     get:
       description: ''
-      parameters:
-        - name: page
-          in: query
-          description: A page number within the paginated result set.
-          required: false
-          type: integer
-          default: 0
-        - name: page_size
-          in: query
-          description: Size of the page
-          required: false
-          type: integer
-          default: 10
-        - name: sort_by
-          in: query
-          description: Attribute to sort results by
-          required: false
-          type: string
-          default: id
-          enum: [id, name, description, created_at, updated_at]
-        - name: sort_dir
-          in: query
-          description: Direction to sort
-          required: false
-          type: string
-          default: asc
-          enum: [asc, desc]
       responses:
         '200':
           description: 'List tags response'
@@ -50,16 +23,10 @@ paths:
             properties:
               count:
                 type: integer
-              next:
-                type: string
-                format: uri
-              previous:
-                type: string
-                format: uri
               results:
                 type: array
                 items:
-                  $ref: '#/definitions/TagRetrieve'
+                  $ref: '#/definitions/NamespaceRetrieve'
       tags:
         - tags
     post:
@@ -215,6 +182,20 @@ definitions:
       namespace:
         title: Namespace
         type: string
+  NamespaceRetrieve:
+    required:
+      - name
+      - tags
+    type: object
+    properties:
+      name:
+        title: Name
+        type: string
+      tags:
+        title: Tags
+        type: array
+        items:
+          type: object
   TagRetrieve:
     required:
       - id
