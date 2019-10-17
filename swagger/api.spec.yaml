@@ -14,19 +14,9 @@ paths:
       description: ''
       responses:
         '200':
-          description: 'List tags response'
+          description: 'Group tags by namespace response'
           schema:
-            required:
-              - count
-              - results
             type: object
-            properties:
-              count:
-                type: integer
-              results:
-                type: array
-                items:
-                  $ref: '#/definitions/NamespaceRetrieve'
       tags:
         - tags
     post:
@@ -182,20 +172,6 @@ definitions:
       namespace:
         title: Namespace
         type: string
-  NamespaceRetrieve:
-    required:
-      - name
-      - tags
-    type: object
-    properties:
-      name:
-        title: Name
-        type: string
-      tags:
-        title: Tags
-        type: array
-        items:
-          type: object
   TagRetrieve:
     required:
       - id

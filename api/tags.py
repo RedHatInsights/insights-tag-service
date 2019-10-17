@@ -27,14 +27,14 @@ async def search(request=None):
         db.scalar(db.select([db.func.count(Tag.id)]))
     )
 
-    tags_dump = [tag.dump() for tag in tags]
-    namespaces_list = []
-    ns1 = {}
-    ns1["name"] = "testNamespace"
-    ns1["tags"] = [{"name1": "value1"}, {"name2": "value2"}]
-    namespaces_list.append(ns1)
+    # tags_dump = [tag.dump() for tag in tags]
+    namespaces_data = {}
+    for tag in tags:
+        if tag.namespace not in namespaces_data:
+            namespaces_data[tag.namespace] = []
+        namespaces_data[tag.namespace].append({tag.name: tag.value})
 
-    return responses.search(count, namespaces_list)
+    return responses.get(namespaces_data)
 
 
 async def post(request=None):
