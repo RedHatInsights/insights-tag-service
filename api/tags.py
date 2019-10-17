@@ -27,7 +27,6 @@ async def search(request=None):
         db.scalar(db.select([db.func.count(Tag.id)]))
     )
 
-    # tags_dump = [tag.dump() for tag in tags]
     namespaces_data = {}
     for tag in tags:
         if tag.namespace not in namespaces_data:
