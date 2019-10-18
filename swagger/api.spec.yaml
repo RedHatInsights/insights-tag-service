@@ -131,6 +131,16 @@ paths:
         description: A unique value identifying this tag.
         required: true
         type: string
+    delete:
+      description: ''
+      parameters: []
+      responses:
+        '204':
+            description: 'DELETE tag successful response'
+        '404':
+            $ref: '#/responses/NotFound'
+      tags:
+        - tags
 responses:
   NotFound:
     description: The specified resource was not found

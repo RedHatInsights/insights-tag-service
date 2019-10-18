@@ -1,5 +1,6 @@
 import asyncio
 
+from aiohttp.web import json_response
 from db.models import Tag
 from insights_connexion import responses
 from insights_connexion.db.gino import db
@@ -20,6 +21,15 @@ async def _update_tag(id, body):
         updated_tag = await _get_one_tag(id)
         return responses.update(updated_tag.dump())
 
+async def _delete_tag(id):
+    async with db.transaction():
+        existing_tag = await _get_one_tag(id)
+
+        if existing_tag is None:
+            return responses.not_found()
+
+        await existing_tag.delete()
+        return json_response(status=responses.delete())
 
 async def search(page, page_size, sort_by, sort_dir, request=None):
     sort_func = getattr(db, sort_dir)
@@ -57,3 +67,7 @@ async def put(id, request=None):
 async def patch(id, request=None):
     body = await request.json()
     return _update_tag(id, body)
+
+
+async def delete(id):
+    return _delete_tag(id)
