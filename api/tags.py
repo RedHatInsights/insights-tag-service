@@ -10,6 +10,7 @@ async def _get_one_tag(id):
     return await Tag.query.where(Tag.id == id).gino.first()
 
 async def _get_duplicate_tag(account_id, namespace, name, value):
+    tags = await Tag.query.where(and_(Tag.account_id == account_id, Tag.namespace == namespace, Tag.name == name, Tag.value == value)).gino.all()
     return await Tag.query.where(and_(Tag.account_id == account_id, Tag.namespace == namespace, Tag.name == name, Tag.value == value)).gino.first()
 
 async def _update_tag(id, body):
@@ -19,7 +20,9 @@ async def _update_tag(id, body):
         if existing_tag is None:
             return responses.not_found()
 
-        duplicate_tag = await _get_duplicate_tag(existing_tag.account_id, existing_tag.namespace, existing_tag.name, existing_tag.value)
+        tag_to_create = Tag(**body)
+
+        duplicate_tag = await _get_duplicate_tag(tag_to_create.account_id, tag_to_create.namespace, tag_to_create.name, tag_to_create.value)
         if duplicate_tag is not None:
             return responses.resource_exists('Tag exists; aborted to avoid duplication.')
 
