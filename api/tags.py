@@ -19,6 +19,10 @@ async def _update_tag(id, body):
         if existing_tag is None:
             return responses.not_found()
 
+        duplicate_tag = await _get_duplicate_tag(existing_tag.account_id, existing_tag.namespace, existing_tag.name, existing_tag.value)
+        if duplicate_tag is not None:
+            return responses.resource_exists('Tag exists; aborted to avoid duplication.')
+
         await existing_tag.update(**body).apply()
         updated_tag = await _get_one_tag(id)
         return responses.update(updated_tag.dump())
