@@ -10,7 +10,6 @@ async def _get_one_tag(id):
     return await Tag.query.where(Tag.id == id).gino.first()
 
 async def _get_duplicate_tag(account_id, namespace, name, value):
-    tags = await Tag.query.where(and_(Tag.account_id == account_id, Tag.namespace == namespace, Tag.name == name, Tag.value == value)).gino.all()
     return await Tag.query.where(and_(Tag.account_id == account_id, Tag.namespace == namespace, Tag.name == name, Tag.value == value)).gino.first()
 
 async def _update_tag(id, body):
