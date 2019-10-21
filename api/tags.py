@@ -3,11 +3,14 @@ import asyncio
 from db.models import Tag
 from insights_connexion import responses
 from insights_connexion.db.gino import db
+from sqlalchemy import and_
 
 
 async def _get_one_tag(id):
     return await Tag.query.where(Tag.id == id).gino.first()
 
+async def _get_duplicate_tag(account_id, namespace, name, value):
+    return await Tag.query.where(and_(Tag.account_id == account_id, Tag.namespace == namespace, Tag.name == name, Tag.value == value)).gino.first()
 
 async def _update_tag(id, body):
     async with db.transaction():
@@ -37,8 +40,13 @@ async def post(request=None):
     async with db.transaction():
         body = await request.json()
         tag_to_create = Tag(**body)
-        created_tag = await tag_to_create.create()
-        return responses.create(created_tag.dump())
+        # Wait to see if a duplicate exists
+        duplicate_tag = await _get_duplicate_tag(tag_to_create.account_id, tag_to_create.namespace, tag_to_create.name, tag_to_create.value)
+        if duplicate_tag is None:
+            created_tag = await tag_to_create.create()
+            return responses.create(created_tag.dump())
+        else:
+            return responses.resource_exists('Tag exists; aborted to avoid duplication.')
 
 
 async def get(id):
