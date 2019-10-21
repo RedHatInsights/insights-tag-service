@@ -21,16 +21,19 @@ async def _update_tag(id, body):
         return responses.update(updated_tag.dump())
 
 
-async def search(page, page_size, sort_by, sort_dir, request=None):
-    sort_func = getattr(db, sort_dir)
+async def search(request=None):
     [tags, count] = await asyncio.gather(
-        Tag.query.limit(page_size).offset(
-            page * page_size).order_by(sort_func(sort_by)).gino.all(),
+        Tag.query.gino.all(),
         db.scalar(db.select([db.func.count(Tag.id)]))
     )
 
-    tags_dump = [tag.dump() for tag in tags]
-    return responses.search(count, tags_dump)
+    namespaces_data = {}
+    for tag in tags:
+        if tag.namespace not in namespaces_data:
+            namespaces_data[tag.namespace] = []
+        namespaces_data[tag.namespace].append({tag.name: tag.value})
+
+    return responses.get(namespaces_data)
 
 
 async def post(request=None):
